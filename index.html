@@ -101,6 +101,12 @@
             tower.focusedEnemy = null;
         return overlapped;
     }
+    function checkTrueOverlapping(tower2, enemy) {
+        var overlapped = game.physics.arcade.distanceBetween(tower2, enemy) < tower2.range + enemy.size / 2;
+        if (tower2.focusedEnemy === enemy && !overlapped)
+            tower2.focusedEnemy = null;
+        return overlapped;
+    }
 
     function attackEnemies(tower, enemy) {
         if (enemy.focusable)
@@ -118,6 +124,24 @@
             tower.focusedEnemy = null;
             killEnemy(enemy);
             console.log(enemy.name + ' killed by ' + tower.name);
+        }
+    }
+    function attackEnemies(tower2, enemy) {
+        if (enemy.focusable)
+            tower2.focusedEnemy = tower2.focusedEnemy || enemy;
+        else
+            return;
+
+        if (tower2.focusedEnemy !== enemy)
+            return;
+        enemy.hp -= tower2.attack;
+        console.log(enemy.name + ' attacked by ' + tower2.name + ': -' +
+            tower2.attack);
+        if (enemy.hp <= 0) {
+            TD.gold += enemy.fullHp * 0.05;
+            tower2.focusedEnemy = null;
+            killEnemy(enemy);
+            console.log(enemy.name + ' killed by ' + tower2.name);
         }
     }
 
@@ -278,10 +302,10 @@
         }
         if (TD.gold >= baseTowerInfo2.price) {
             TD.gold -= baseTowerInfo2.price;
-            var newTower = game.add.sprite(game.input.x, game.input.y, textures.tower2);
-            newTower.anchor.set(0.5);
-            game.physics.enable(newTower, Phaser.Physics.ARCADE);
-            buildingTower = newTower;
+            var newTower2 = game.add.sprite(game.input.x, game.input.y, textures.tower2);
+            newTower2.anchor.set(0.5);
+            game.physics.enable(newTower2, Phaser.Physics.ARCADE);
+            buildingTower = newTower2;
             isBuildingTower = true;
     }
     
