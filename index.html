@@ -147,6 +147,19 @@
                     baseEnemyInfo.size / 2 : tower.x;
                 cross.y = tower.focusedEnemy ? tower.focusedEnemy.y : tower.y;
             }
+            var tower2 = TD.towers.getChildAt(i);
+            if (tower2.focusedEnemy) {
+                if (tower2.focusedEnemy.alive)
+                    checkTrueOverlapping(tower2, tower2.focusedEnemy);
+                else
+                    tower2.focusedEnemy = null;
+            }
+            if (areCrossesEnabled) {
+                var cross = tower2.tcross;
+                cross.x = tower2.focusedEnemy ? tower2.focusedEnemy.x -
+                    baseEnemyInfo.size / 2 : tower2.x;
+                cross.y = tower2.focusedEnemy ? tower2.focusedEnemy.y : tower2.y;
+            }
         }
     }
 
@@ -263,7 +276,15 @@
             buildingTower = newTower;
             isBuildingTower = true;
         }
+        if (TD.gold >= baseTowerInfo2.price) {
+            TD.gold -= baseTowerInfo2.price;
+            var newTower = game.add.sprite(game.input.x, game.input.y, textures.tower2);
+            newTower.anchor.set(0.5);
+            game.physics.enable(newTower, Phaser.Physics.ARCADE);
+            buildingTower = newTower;
+            isBuildingTower = true;
     }
+    
 
     function activateTower(tower) {
         isBuildingTower = false;
@@ -273,8 +294,19 @@
             cross.anchor.set(0.5);
             tower.tcross = cross;
         }
+        TD.towers.add(tower2);
+        isBuildingTower = false;
+        Object.assign(tower2, baseTowerInfo2);
+        if (areCrossesEnabled) {
+            var cross = game.add.sprite(tower2.x, towe2.y, textures.cross);
+            cross.anchor.set(0.5);
+            tower.tcross = cross;
+        }
         TD.towers.add(tower);
     }
+        
+
+        
 
     function gameOver() {
         alert('You lose! Castle HP = ' + TD.castle.hp);
