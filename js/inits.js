@@ -97,6 +97,9 @@ function initSidebar() {
 
     game.add.button(styles.sidebarPadding, styles.sidebarPadding + row * 18 * 2.5, textures.towerSq, buyTower).anchor.set(0, 0.5);
     addGoldString(baseTowerInfo.price, styles.sidebarPadding + baseTowerInfo.size * 1.2, styles.sidebarPadding + row * 18 * 2.5);
+    
+    game.add.button(styles.sidebarPadding, styles.sidebarPadding + row * 18 * 2.5, textures.towerSq2, buyTower).anchor.set(0, 0.5);
+    addGoldString(baseTowerInfo.price, styles.sidebarPadding + baseTowerInfo2.size * 1.2, styles.sidebarPadding + row * 18 * 2.5);
 
     function addText(string, x) {
         x = x === undefined ? 0 : x;
@@ -184,8 +187,8 @@ function createTextures() {
     textures.tower.circle(baseTowerInfo.range, baseTowerInfo.range, baseTowerInfo.size / 2, 'rgba(76,178,255,1)');
     
        // Tower2
-    textures.towerSq = game.add.bitmapData(baseTower2Info.size, baseTower2Info.size);
-    textures.towerSq.rect(0, 0, baseTower2Info.size, baseTower2Info.size, 'rgba(76,178,255,1)');
+    textures.towerSq2 = game.add.bitmapData(baseTower2Info.size, baseTower2Info.size);
+    textures.towerSq2.rect(0, 0, baseTower2Info.size, baseTower2Info.size, 'rgba(76,178,255,1)');
     // Tower2 (area)
     textures.tower2 = game.add.bitmapData(baseTower2Info.range * 2, baseTower2Info.range * 2);
     textures.tower2.circle(baseTower2Info.range, baseTower2Info.range, baseTower2Info.range, 'rgb(229, 246, 223,1)');
