@@ -8,6 +8,13 @@ var baseTowerInfo = {
 };
 baseTowerInfo.size = baseTowerInfo.range * 0.32;
 
+var baseTower2Info = {
+    range: 80,
+    attack: 3,
+    price: 200
+};
+baseTower2Info.size = baseTower2Info.range * 0.40;
+
 var baseEnemyInfo = {};
 baseEnemyInfo.margin = 20;
 baseEnemyInfo.size = 20;
@@ -175,6 +182,15 @@ function createTextures() {
     textures.tower = game.add.bitmapData(baseTowerInfo.range * 2, baseTowerInfo.range * 2);
     textures.tower.circle(baseTowerInfo.range, baseTowerInfo.range, baseTowerInfo.range, 'rgba(76,178,255,0.1)');
     textures.tower.circle(baseTowerInfo.range, baseTowerInfo.range, baseTowerInfo.size / 2, 'rgba(76,178,255,1)');
+    
+       // Tower2
+    textures.towerSq = game.add.bitmapData(baseTower2Info.size, baseTower2Info.size);
+    textures.towerSq.rect(0, 0, baseTower2Info.size, baseTower2Info.size, 'rgba(76,178,255,1)');
+    // Tower2 (area)
+    textures.tower2 = game.add.bitmapData(baseTower2Info.range * 2, baseTower2Info.range * 2);
+    textures.tower2.circle(baseTower2Info.range, baseTower2Info.range, baseTower2Info.range, 'rgb(229, 246, 223,1)');
+    textures.tower2.circle(baseTower2Info.range, baseTower2Info.range, baseTower2Info.size / 2, 'rgba(76,178,255,1)');
+
 
     // GoldCoin
     textures.coinSize = 15;
